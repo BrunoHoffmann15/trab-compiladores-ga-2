@@ -20,8 +20,7 @@ public class FoolGrammarParser extends Parser {
 		COMMA=10, INVALIDIDENTIFIER=11, IDENTIFIER=12, NUMBER=13, ATRIB=14, PLUS=15, 
 		TIMES=16, EQUALS=17, LESS=18, GREATER=19, NOT=20, AND=21, OR=22, SEMICOLON=23, 
 		LPAREN=24, RPAREN=25, LBRACE=26, RBRACE=27, WS=28, PALAVRARESERVADA=29, 
-		LITERAL=30, IDENTIFICADOR=31, OPERADOR=32, DELIMITADOR=33, OPERADORESARITMETICOS=34, 
-		TIPOS=35;
+		LITERAL=30, IDENTIFICADOR=31, OPERADOR=32, DELIMITADOR=33;
 	public static final int
 		RULE_declaracaoAtributo = 0;
 	private static String[] makeRuleNames() {
@@ -45,8 +44,7 @@ public class FoolGrammarParser extends Parser {
 			"FALSE", "COMMA", "INVALIDIDENTIFIER", "IDENTIFIER", "NUMBER", "ATRIB", 
 			"PLUS", "TIMES", "EQUALS", "LESS", "GREATER", "NOT", "AND", "OR", "SEMICOLON", 
 			"LPAREN", "RPAREN", "LBRACE", "RBRACE", "WS", "PALAVRARESERVADA", "LITERAL", 
-			"IDENTIFICADOR", "OPERADOR", "DELIMITADOR", "OPERADORESARITMETICOS", 
-			"TIPOS"
+			"IDENTIFICADOR", "OPERADOR", "DELIMITADOR"
 		};
 	}
 	private static final String[] _SYMBOLIC_NAMES = makeSymbolicNames();
@@ -102,9 +100,10 @@ public class FoolGrammarParser extends Parser {
 
 	@SuppressWarnings("CheckReturnValue")
 	public static class DeclaracaoAtributoContext extends ParserRuleContext {
-		public TerminalNode TIPOS() { return getToken(FoolGrammarParser.TIPOS, 0); }
+		public TerminalNode INT() { return getToken(FoolGrammarParser.INT, 0); }
 		public TerminalNode IDENTIFIER() { return getToken(FoolGrammarParser.IDENTIFIER, 0); }
 		public TerminalNode SEMICOLON() { return getToken(FoolGrammarParser.SEMICOLON, 0); }
+		public TerminalNode BOOL() { return getToken(FoolGrammarParser.BOOL, 0); }
 		public DeclaracaoAtributoContext(ParserRuleContext parent, int invokingState) {
 			super(parent, invokingState);
 		}
@@ -123,14 +122,33 @@ public class FoolGrammarParser extends Parser {
 		DeclaracaoAtributoContext _localctx = new DeclaracaoAtributoContext(_ctx, getState());
 		enterRule(_localctx, 0, RULE_declaracaoAtributo);
 		try {
-			enterOuterAlt(_localctx, 1);
-			{
-			setState(2);
-			match(TIPOS);
-			setState(3);
-			match(IDENTIFIER);
-			setState(4);
-			match(SEMICOLON);
+			setState(8);
+			_errHandler.sync(this);
+			switch (_input.LA(1)) {
+			case INT:
+				enterOuterAlt(_localctx, 1);
+				{
+				setState(2);
+				match(INT);
+				setState(3);
+				match(IDENTIFIER);
+				setState(4);
+				match(SEMICOLON);
+				}
+				break;
+			case BOOL:
+				enterOuterAlt(_localctx, 2);
+				{
+				setState(5);
+				match(BOOL);
+				setState(6);
+				match(IDENTIFIER);
+				setState(7);
+				match(SEMICOLON);
+				}
+				break;
+			default:
+				throw new NoViableAltException(this);
 			}
 		}
 		catch (RecognitionException re) {
@@ -145,11 +163,14 @@ public class FoolGrammarParser extends Parser {
 	}
 
 	public static final String _serializedATN =
-		"\u0004\u0001#\u0007\u0002\u0000\u0007\u0000\u0001\u0000\u0001\u0000\u0001"+
-		"\u0000\u0001\u0000\u0001\u0000\u0000\u0000\u0001\u0000\u0000\u0000\u0005"+
-		"\u0000\u0002\u0001\u0000\u0000\u0000\u0002\u0003\u0005#\u0000\u0000\u0003"+
-		"\u0004\u0005\f\u0000\u0000\u0004\u0005\u0005\u0017\u0000\u0000\u0005\u0001"+
-		"\u0001\u0000\u0000\u0000\u0000";
+		"\u0004\u0001!\u000b\u0002\u0000\u0007\u0000\u0001\u0000\u0001\u0000\u0001"+
+		"\u0000\u0001\u0000\u0001\u0000\u0001\u0000\u0003\u0000\t\b\u0000\u0001"+
+		"\u0000\u0000\u0000\u0001\u0000\u0000\u0000\n\u0000\b\u0001\u0000\u0000"+
+		"\u0000\u0002\u0003\u0005\u0002\u0000\u0000\u0003\u0004\u0005\f\u0000\u0000"+
+		"\u0004\t\u0005\u0017\u0000\u0000\u0005\u0006\u0005\u0003\u0000\u0000\u0006"+
+		"\u0007\u0005\f\u0000\u0000\u0007\t\u0005\u0017\u0000\u0000\b\u0002\u0001"+
+		"\u0000\u0000\u0000\b\u0005\u0001\u0000\u0000\u0000\t\u0001\u0001\u0000"+
+		"\u0000\u0000\u0001\b";
 	public static final ATN _ATN =
 		new ATNDeserializer().deserialize(_serializedATN.toCharArray());
 	static {

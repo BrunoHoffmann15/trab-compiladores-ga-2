@@ -26,14 +26,20 @@ alias grun='java -Xmx500M -cp "/usr/local/lib/antlr-4.13.2-complete.jar:$CLASSPA
 
 ## Como executar
 
-1. Após instalar os pré-requisitos você precisa executar a compilação do `.java`, para isso execute: 
+1. Transforme o arquivo `.g4` em uma classe java, para isso execute:
+
+```bash
+antlr4 FoolGrammar.g4
+```
+
+2. Após instalar os pré-requisitos você precisa executar a compilação do `.java`, para isso execute: 
 Obs: ao utilizar o `/tools/antlr-4.x-complete.jar` você garante o uso das bibliotecas do antlr.
 
 ```bash
 javac -cp ../tools/antlr-4.x-complete.jar **.java
 ```
 
-2. A partir disso você pode executar os comandos para testar as árvores sintática:
+3. A partir disso você pode executar os comandos para testar as árvores sintática:
 
 ```bash
 grun FoolGrammar <<regra de prod>> -tree
