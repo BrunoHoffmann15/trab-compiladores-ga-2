@@ -7,6 +7,26 @@ import org.antlr.v4.runtime.tree.ParseTreeListener;
  */
 public interface FoolGrammarListener extends ParseTreeListener {
 	/**
+	 * Enter a parse tree produced by {@link FoolGrammarParser#declaracaoClasse}.
+	 * @param ctx the parse tree
+	 */
+	void enterDeclaracaoClasse(FoolGrammarParser.DeclaracaoClasseContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link FoolGrammarParser#declaracaoClasse}.
+	 * @param ctx the parse tree
+	 */
+	void exitDeclaracaoClasse(FoolGrammarParser.DeclaracaoClasseContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link FoolGrammarParser#comandos}.
+	 * @param ctx the parse tree
+	 */
+	void enterComandos(FoolGrammarParser.ComandosContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link FoolGrammarParser#comandos}.
+	 * @param ctx the parse tree
+	 */
+	void exitComandos(FoolGrammarParser.ComandosContext ctx);
+	/**
 	 * Enter a parse tree produced by {@link FoolGrammarParser#declaracaoAtributo}.
 	 * @param ctx the parse tree
 	 */
@@ -16,4 +36,14 @@ public interface FoolGrammarListener extends ParseTreeListener {
 	 * @param ctx the parse tree
 	 */
 	void exitDeclaracaoAtributo(FoolGrammarParser.DeclaracaoAtributoContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link FoolGrammarParser#expressaoAritmetica}.
+	 * @param ctx the parse tree
+	 */
+	void enterExpressaoAritmetica(FoolGrammarParser.ExpressaoAritmeticaContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link FoolGrammarParser#expressaoAritmetica}.
+	 * @param ctx the parse tree
+	 */
+	void exitExpressaoAritmetica(FoolGrammarParser.ExpressaoAritmeticaContext ctx);
 }

@@ -16,6 +16,30 @@ public class FoolGrammarBaseListener implements FoolGrammarListener {
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
+	@Override public void enterDeclaracaoClasse(FoolGrammarParser.DeclaracaoClasseContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitDeclaracaoClasse(FoolGrammarParser.DeclaracaoClasseContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterComandos(FoolGrammarParser.ComandosContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitComandos(FoolGrammarParser.ComandosContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
 	@Override public void enterDeclaracaoAtributo(FoolGrammarParser.DeclaracaoAtributoContext ctx) { }
 	/**
 	 * {@inheritDoc}
@@ -23,6 +47,18 @@ public class FoolGrammarBaseListener implements FoolGrammarListener {
 	 * <p>The default implementation does nothing.</p>
 	 */
 	@Override public void exitDeclaracaoAtributo(FoolGrammarParser.DeclaracaoAtributoContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterExpressaoAritmetica(FoolGrammarParser.ExpressaoAritmeticaContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitExpressaoAritmetica(FoolGrammarParser.ExpressaoAritmeticaContext ctx) { }
 
 	/**
 	 * {@inheritDoc}

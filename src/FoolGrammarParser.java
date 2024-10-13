@@ -22,10 +22,11 @@ public class FoolGrammarParser extends Parser {
 		LPAREN=24, RPAREN=25, LBRACE=26, RBRACE=27, WS=28, PALAVRARESERVADA=29, 
 		LITERAL=30, IDENTIFICADOR=31, OPERADOR=32, DELIMITADOR=33;
 	public static final int
-		RULE_declaracaoAtributo = 0;
+		RULE_declaracaoClasse = 0, RULE_comandos = 1, RULE_declaracaoAtributo = 2, 
+		RULE_expressaoAritmetica = 3;
 	private static String[] makeRuleNames() {
 		return new String[] {
-			"declaracaoAtributo"
+			"declaracaoClasse", "comandos", "declaracaoAtributo", "expressaoAritmetica"
 		};
 	}
 	public static final String[] ruleNames = makeRuleNames();
@@ -99,6 +100,117 @@ public class FoolGrammarParser extends Parser {
 	}
 
 	@SuppressWarnings("CheckReturnValue")
+	public static class DeclaracaoClasseContext extends ParserRuleContext {
+		public TerminalNode CLASS() { return getToken(FoolGrammarParser.CLASS, 0); }
+		public TerminalNode IDENTIFIER() { return getToken(FoolGrammarParser.IDENTIFIER, 0); }
+		public TerminalNode LBRACE() { return getToken(FoolGrammarParser.LBRACE, 0); }
+		public ComandosContext comandos() {
+			return getRuleContext(ComandosContext.class,0);
+		}
+		public TerminalNode RBRACE() { return getToken(FoolGrammarParser.RBRACE, 0); }
+		public DeclaracaoClasseContext(ParserRuleContext parent, int invokingState) {
+			super(parent, invokingState);
+		}
+		@Override public int getRuleIndex() { return RULE_declaracaoClasse; }
+		@Override
+		public void enterRule(ParseTreeListener listener) {
+			if ( listener instanceof FoolGrammarListener ) ((FoolGrammarListener)listener).enterDeclaracaoClasse(this);
+		}
+		@Override
+		public void exitRule(ParseTreeListener listener) {
+			if ( listener instanceof FoolGrammarListener ) ((FoolGrammarListener)listener).exitDeclaracaoClasse(this);
+		}
+	}
+
+	public final DeclaracaoClasseContext declaracaoClasse() throws RecognitionException {
+		DeclaracaoClasseContext _localctx = new DeclaracaoClasseContext(_ctx, getState());
+		enterRule(_localctx, 0, RULE_declaracaoClasse);
+		try {
+			setState(18);
+			_errHandler.sync(this);
+			switch ( getInterpreter().adaptivePredict(_input,0,_ctx) ) {
+			case 1:
+				enterOuterAlt(_localctx, 1);
+				{
+				setState(8);
+				match(CLASS);
+				setState(9);
+				match(IDENTIFIER);
+				setState(10);
+				match(LBRACE);
+				setState(11);
+				comandos();
+				setState(12);
+				match(RBRACE);
+				}
+				break;
+			case 2:
+				enterOuterAlt(_localctx, 2);
+				{
+				setState(14);
+				match(CLASS);
+				setState(15);
+				match(IDENTIFIER);
+				setState(16);
+				match(LBRACE);
+				setState(17);
+				match(RBRACE);
+				}
+				break;
+			}
+		}
+		catch (RecognitionException re) {
+			_localctx.exception = re;
+			_errHandler.reportError(this, re);
+			_errHandler.recover(this, re);
+		}
+		finally {
+			exitRule();
+		}
+		return _localctx;
+	}
+
+	@SuppressWarnings("CheckReturnValue")
+	public static class ComandosContext extends ParserRuleContext {
+		public DeclaracaoAtributoContext declaracaoAtributo() {
+			return getRuleContext(DeclaracaoAtributoContext.class,0);
+		}
+		public ComandosContext(ParserRuleContext parent, int invokingState) {
+			super(parent, invokingState);
+		}
+		@Override public int getRuleIndex() { return RULE_comandos; }
+		@Override
+		public void enterRule(ParseTreeListener listener) {
+			if ( listener instanceof FoolGrammarListener ) ((FoolGrammarListener)listener).enterComandos(this);
+		}
+		@Override
+		public void exitRule(ParseTreeListener listener) {
+			if ( listener instanceof FoolGrammarListener ) ((FoolGrammarListener)listener).exitComandos(this);
+		}
+	}
+
+	public final ComandosContext comandos() throws RecognitionException {
+		ComandosContext _localctx = new ComandosContext(_ctx, getState());
+		enterRule(_localctx, 2, RULE_comandos);
+		try {
+			enterOuterAlt(_localctx, 1);
+			{
+			setState(20);
+			declaracaoAtributo();
+			}
+		}
+		catch (RecognitionException re) {
+			_localctx.exception = re;
+			_errHandler.reportError(this, re);
+			_errHandler.recover(this, re);
+		}
+		finally {
+			exitRule();
+		}
+		return _localctx;
+	}
+
+	@SuppressWarnings("CheckReturnValue")
 	public static class DeclaracaoAtributoContext extends ParserRuleContext {
 		public TerminalNode INT() { return getToken(FoolGrammarParser.INT, 0); }
 		public TerminalNode IDENTIFIER() { return getToken(FoolGrammarParser.IDENTIFIER, 0); }
@@ -120,30 +232,30 @@ public class FoolGrammarParser extends Parser {
 
 	public final DeclaracaoAtributoContext declaracaoAtributo() throws RecognitionException {
 		DeclaracaoAtributoContext _localctx = new DeclaracaoAtributoContext(_ctx, getState());
-		enterRule(_localctx, 0, RULE_declaracaoAtributo);
+		enterRule(_localctx, 4, RULE_declaracaoAtributo);
 		try {
-			setState(8);
+			setState(28);
 			_errHandler.sync(this);
 			switch (_input.LA(1)) {
 			case INT:
 				enterOuterAlt(_localctx, 1);
 				{
-				setState(2);
+				setState(22);
 				match(INT);
-				setState(3);
+				setState(23);
 				match(IDENTIFIER);
-				setState(4);
+				setState(24);
 				match(SEMICOLON);
 				}
 				break;
 			case BOOL:
 				enterOuterAlt(_localctx, 2);
 				{
-				setState(5);
+				setState(25);
 				match(BOOL);
-				setState(6);
+				setState(26);
 				match(IDENTIFIER);
-				setState(7);
+				setState(27);
 				match(SEMICOLON);
 				}
 				break;
@@ -162,15 +274,96 @@ public class FoolGrammarParser extends Parser {
 		return _localctx;
 	}
 
+	@SuppressWarnings("CheckReturnValue")
+	public static class ExpressaoAritmeticaContext extends ParserRuleContext {
+		public List<TerminalNode> IDENTIFIER() { return getTokens(FoolGrammarParser.IDENTIFIER); }
+		public TerminalNode IDENTIFIER(int i) {
+			return getToken(FoolGrammarParser.IDENTIFIER, i);
+		}
+		public TerminalNode PLUS() { return getToken(FoolGrammarParser.PLUS, 0); }
+		public TerminalNode TIMES() { return getToken(FoolGrammarParser.TIMES, 0); }
+		public ExpressaoAritmeticaContext(ParserRuleContext parent, int invokingState) {
+			super(parent, invokingState);
+		}
+		@Override public int getRuleIndex() { return RULE_expressaoAritmetica; }
+		@Override
+		public void enterRule(ParseTreeListener listener) {
+			if ( listener instanceof FoolGrammarListener ) ((FoolGrammarListener)listener).enterExpressaoAritmetica(this);
+		}
+		@Override
+		public void exitRule(ParseTreeListener listener) {
+			if ( listener instanceof FoolGrammarListener ) ((FoolGrammarListener)listener).exitExpressaoAritmetica(this);
+		}
+	}
+
+	public final ExpressaoAritmeticaContext expressaoAritmetica() throws RecognitionException {
+		ExpressaoAritmeticaContext _localctx = new ExpressaoAritmeticaContext(_ctx, getState());
+		enterRule(_localctx, 6, RULE_expressaoAritmetica);
+		try {
+			setState(36);
+			_errHandler.sync(this);
+			switch ( getInterpreter().adaptivePredict(_input,2,_ctx) ) {
+			case 1:
+				enterOuterAlt(_localctx, 1);
+				{
+				setState(30);
+				match(IDENTIFIER);
+				setState(31);
+				match(PLUS);
+				setState(32);
+				match(IDENTIFIER);
+				}
+				break;
+			case 2:
+				enterOuterAlt(_localctx, 2);
+				{
+				setState(33);
+				match(IDENTIFIER);
+				setState(34);
+				match(TIMES);
+				setState(35);
+				match(IDENTIFIER);
+				}
+				break;
+			}
+		}
+		catch (RecognitionException re) {
+			_localctx.exception = re;
+			_errHandler.reportError(this, re);
+			_errHandler.recover(this, re);
+		}
+		finally {
+			exitRule();
+		}
+		return _localctx;
+	}
+
 	public static final String _serializedATN =
-		"\u0004\u0001!\u000b\u0002\u0000\u0007\u0000\u0001\u0000\u0001\u0000\u0001"+
-		"\u0000\u0001\u0000\u0001\u0000\u0001\u0000\u0003\u0000\t\b\u0000\u0001"+
-		"\u0000\u0000\u0000\u0001\u0000\u0000\u0000\n\u0000\b\u0001\u0000\u0000"+
-		"\u0000\u0002\u0003\u0005\u0002\u0000\u0000\u0003\u0004\u0005\f\u0000\u0000"+
-		"\u0004\t\u0005\u0017\u0000\u0000\u0005\u0006\u0005\u0003\u0000\u0000\u0006"+
-		"\u0007\u0005\f\u0000\u0000\u0007\t\u0005\u0017\u0000\u0000\b\u0002\u0001"+
-		"\u0000\u0000\u0000\b\u0005\u0001\u0000\u0000\u0000\t\u0001\u0001\u0000"+
-		"\u0000\u0000\u0001\b";
+		"\u0004\u0001!\'\u0002\u0000\u0007\u0000\u0002\u0001\u0007\u0001\u0002"+
+		"\u0002\u0007\u0002\u0002\u0003\u0007\u0003\u0001\u0000\u0001\u0000\u0001"+
+		"\u0000\u0001\u0000\u0001\u0000\u0001\u0000\u0001\u0000\u0001\u0000\u0001"+
+		"\u0000\u0001\u0000\u0003\u0000\u0013\b\u0000\u0001\u0001\u0001\u0001\u0001"+
+		"\u0002\u0001\u0002\u0001\u0002\u0001\u0002\u0001\u0002\u0001\u0002\u0003"+
+		"\u0002\u001d\b\u0002\u0001\u0003\u0001\u0003\u0001\u0003\u0001\u0003\u0001"+
+		"\u0003\u0001\u0003\u0003\u0003%\b\u0003\u0001\u0003\u0000\u0000\u0004"+
+		"\u0000\u0002\u0004\u0006\u0000\u0000%\u0000\u0012\u0001\u0000\u0000\u0000"+
+		"\u0002\u0014\u0001\u0000\u0000\u0000\u0004\u001c\u0001\u0000\u0000\u0000"+
+		"\u0006$\u0001\u0000\u0000\u0000\b\t\u0005\u0001\u0000\u0000\t\n\u0005"+
+		"\f\u0000\u0000\n\u000b\u0005\u001a\u0000\u0000\u000b\f\u0003\u0002\u0001"+
+		"\u0000\f\r\u0005\u001b\u0000\u0000\r\u0013\u0001\u0000\u0000\u0000\u000e"+
+		"\u000f\u0005\u0001\u0000\u0000\u000f\u0010\u0005\f\u0000\u0000\u0010\u0011"+
+		"\u0005\u001a\u0000\u0000\u0011\u0013\u0005\u001b\u0000\u0000\u0012\b\u0001"+
+		"\u0000\u0000\u0000\u0012\u000e\u0001\u0000\u0000\u0000\u0013\u0001\u0001"+
+		"\u0000\u0000\u0000\u0014\u0015\u0003\u0004\u0002\u0000\u0015\u0003\u0001"+
+		"\u0000\u0000\u0000\u0016\u0017\u0005\u0002\u0000\u0000\u0017\u0018\u0005"+
+		"\f\u0000\u0000\u0018\u001d\u0005\u0017\u0000\u0000\u0019\u001a\u0005\u0003"+
+		"\u0000\u0000\u001a\u001b\u0005\f\u0000\u0000\u001b\u001d\u0005\u0017\u0000"+
+		"\u0000\u001c\u0016\u0001\u0000\u0000\u0000\u001c\u0019\u0001\u0000\u0000"+
+		"\u0000\u001d\u0005\u0001\u0000\u0000\u0000\u001e\u001f\u0005\f\u0000\u0000"+
+		"\u001f \u0005\u000f\u0000\u0000 %\u0005\f\u0000\u0000!\"\u0005\f\u0000"+
+		"\u0000\"#\u0005\u0010\u0000\u0000#%\u0005\f\u0000\u0000$\u001e\u0001\u0000"+
+		"\u0000\u0000$!\u0001\u0000\u0000\u0000%\u0007\u0001\u0000\u0000\u0000"+
+		"\u0003\u0012\u001c$";
 	public static final ATN _ATN =
 		new ATNDeserializer().deserialize(_serializedATN.toCharArray());
 	static {
