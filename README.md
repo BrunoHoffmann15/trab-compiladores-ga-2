@@ -42,7 +42,7 @@ javac -cp ../tools/antlr-4.x-complete.jar **.java
 3. A partir disso você pode executar os comandos para testar as árvores sintática:
 
 ```bash
-grun FoolGrammar <<regra de prod>> -tree
+grun FoolGrammar <<regra de prod>> -gui
 ```
 
 Ou:
@@ -52,3 +52,11 @@ grun FoolGrammar <<regra de prod>> -tree
 ```
 
 Observações: o <<regra de prod>> você substitui para a regra inicial.
+
+Exemplo:
+
+```bash
+grun FoolGrammar declaracaoMetodo -gui
+int metodo() {}
+ˆD
+```
