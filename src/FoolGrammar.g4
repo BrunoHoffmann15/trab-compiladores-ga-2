@@ -28,6 +28,7 @@ LPAREN: '(';
 RPAREN: ')';
 LBRACE: '{';
 RBRACE: '}';
+WS : [ \t\r\n]+ -> skip ;
 
 // Classes
 PALAVRARESERVADA: CLASS | INT | BOOL | VOID | IF | ELSE | RETURN;
@@ -36,8 +37,4 @@ IDENTIFICADOR: IDENTIFIER;
 OPERADOR: ATRIB | PLUS | TIMES | EQUALS | LESS | GREATER | NOT | AND | OR;
 DELIMITADOR: COMMA | SEMICOLON | LPAREN | RPAREN | LBRACE | RBRACE;
 
-
-// Regras de produção
-expr: term ( (PLUS | MINUS) term )*; // Expressão
-term: factor ( (TIMES | DIV) factor )*; // Termo
-factor: NUMBER | LPAREN expr RPAREN; // Fator
+declaracaoAtributo: INT IDENTIFIER SEMICOLON;
