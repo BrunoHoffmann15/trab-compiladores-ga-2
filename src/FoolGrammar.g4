@@ -11,10 +11,9 @@ RETURN: 'return';
 TRUE: 'true';
 FALSE: 'false';
 COMMA: ',';
-INVALIDIDENTIFIER: [0-9][a-zA-Z0-9_]*;
 IDENTIFIER: [a-zA-Z_][a-zA-Z0-9_]*;
 NUMBER: [0-9]+;
-ASSIGN: '=';
+ASSIGN: '='; // Usando ASSIGN ao invés de ATRIB
 PLUS: '+';
 TIMES: '*';
 EQUALS: '==';
@@ -30,9 +29,15 @@ LBRACE: '{';
 RBRACE: '}';
 WS : [ \t\r\n]+ -> skip ;
 
-// Regras de Produção
-declaracaoClasse: CLASS IDENTIFIER LBRACE comandos RBRACE;
-comandos: declaracaoAtributo | ;
+// Regras para a linguagem FOOL
+
+// Um programa é uma única declaração de classe
+programa: declaracaoClasse EOF;
+
+// Declaração de classe
+declaracaoClasse: CLASS IDENTIFIER LBRACE (declaracaoAtributo | declaracaoMetodo)* RBRACE;
+
+// Declaração de atributo
 declaracaoAtributo: tipo IDENTIFIER SEMICOLON;
 
 // Declaração de método
@@ -51,7 +56,7 @@ comandos: (comando SEMICOLON)*;
 comando: atribuicao
        | condicional
        | chamadaMetodo
-       | RETURN expressao;
+       | RETURN expressao SEMICOLON; // Adicionado SEMICOLON para finalizar o comando
 
 // Atribuição
 atribuicao: IDENTIFIER ASSIGN expressao;
