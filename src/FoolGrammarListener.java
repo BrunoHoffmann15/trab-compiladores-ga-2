@@ -37,6 +37,36 @@ public interface FoolGrammarListener extends ParseTreeListener {
 	 */
 	void exitDeclaracaoAtributo(FoolGrammarParser.DeclaracaoAtributoContext ctx);
 	/**
+	 * Enter a parse tree produced by {@link FoolGrammarParser#argumentos}.
+	 * @param ctx the parse tree
+	 */
+	void enterArgumentos(FoolGrammarParser.ArgumentosContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link FoolGrammarParser#argumentos}.
+	 * @param ctx the parse tree
+	 */
+	void exitArgumentos(FoolGrammarParser.ArgumentosContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link FoolGrammarParser#declaracaoMetodo}.
+	 * @param ctx the parse tree
+	 */
+	void enterDeclaracaoMetodo(FoolGrammarParser.DeclaracaoMetodoContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link FoolGrammarParser#declaracaoMetodo}.
+	 * @param ctx the parse tree
+	 */
+	void exitDeclaracaoMetodo(FoolGrammarParser.DeclaracaoMetodoContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link FoolGrammarParser#tipo}.
+	 * @param ctx the parse tree
+	 */
+	void enterTipo(FoolGrammarParser.TipoContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link FoolGrammarParser#tipo}.
+	 * @param ctx the parse tree
+	 */
+	void exitTipo(FoolGrammarParser.TipoContext ctx);
+	/**
 	 * Enter a parse tree produced by {@link FoolGrammarParser#expressaoAritmetica}.
 	 * @param ctx the parse tree
 	 */

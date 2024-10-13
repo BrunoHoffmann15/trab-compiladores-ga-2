@@ -39,6 +39,9 @@ DELIMITADOR: COMMA | SEMICOLON | LPAREN | RPAREN | LBRACE | RBRACE;
 
 
 declaracaoClasse: CLASS IDENTIFIER LBRACE comandos RBRACE | CLASS IDENTIFIER LBRACE RBRACE;
-comandos: declaracaoAtributo;
-declaracaoAtributo: INT IDENTIFIER SEMICOLON | BOOL IDENTIFIER SEMICOLON;
+comandos: declaracaoAtributo | ;
+declaracaoAtributo: tipo IDENTIFIER SEMICOLON;
+argumentos: tipo IDENTIFIER | tipo IDENTIFIER COMMA argumentos;
+declaracaoMetodo: tipo IDENTIFIER LPAREN argumentos RPAREN LBRACE comandos RBRACE | tipo IDENTIFIER LPAREN RPAREN LBRACE comandos RBRACE;
+tipo: INT | BOOL;
 expressaoAritmetica: IDENTIFIER PLUS IDENTIFIER | IDENTIFIER TIMES IDENTIFIER;
