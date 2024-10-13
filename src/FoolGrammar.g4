@@ -30,15 +30,8 @@ LBRACE: '{';
 RBRACE: '}';
 WS : [ \t\r\n]+ -> skip ;
 
-// Classes
-PALAVRARESERVADA: CLASS | INT | BOOL | VOID | IF | ELSE | RETURN;
-LITERAL: TRUE | FALSE | NUMBER;
-IDENTIFICADOR: IDENTIFIER;
-OPERADOR: ATRIB | PLUS | TIMES | EQUALS | LESS | GREATER | NOT | AND | OR;
-DELIMITADOR: COMMA | SEMICOLON | LPAREN | RPAREN | LBRACE | RBRACE;
-
-
-declaracaoClasse: CLASS IDENTIFIER LBRACE comandos RBRACE | CLASS IDENTIFIER LBRACE RBRACE;
+// Regras de Produção
+declaracaoClasse: CLASS IDENTIFIER LBRACE comandos RBRACE;
 comandos: declaracaoAtributo | ;
 declaracaoAtributo: tipo IDENTIFIER SEMICOLON;
 argumentos: tipo IDENTIFIER | tipo IDENTIFIER COMMA argumentos;
