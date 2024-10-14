@@ -67,6 +67,16 @@ public interface FoolGrammarListener extends ParseTreeListener {
 	 */
 	void exitTipo(FoolGrammarParser.TipoContext ctx);
 	/**
+	 * Enter a parse tree produced by {@link FoolGrammarParser#tipoMetodos}.
+	 * @param ctx the parse tree
+	 */
+	void enterTipoMetodos(FoolGrammarParser.TipoMetodosContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link FoolGrammarParser#tipoMetodos}.
+	 * @param ctx the parse tree
+	 */
+	void exitTipoMetodos(FoolGrammarParser.TipoMetodosContext ctx);
+	/**
 	 * Enter a parse tree produced by {@link FoolGrammarParser#comandos}.
 	 * @param ctx the parse tree
 	 */

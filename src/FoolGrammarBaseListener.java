@@ -88,6 +88,18 @@ public class FoolGrammarBaseListener implements FoolGrammarListener {
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
+	@Override public void enterTipoMetodos(FoolGrammarParser.TipoMetodosContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitTipoMetodos(FoolGrammarParser.TipoMetodosContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
 	@Override public void enterComandos(FoolGrammarParser.ComandosContext ctx) { }
 	/**
 	 * {@inheritDoc}

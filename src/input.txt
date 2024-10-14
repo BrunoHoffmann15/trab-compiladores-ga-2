@@ -1,0 +1,8 @@
+class Main {
+  int val;
+  int valDois;
+
+  int main() {
+    if (val == valDois) return val + valDois; else return valDois;;
+  }
+}

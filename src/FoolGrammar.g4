@@ -41,13 +41,16 @@ declaracaoClasse: CLASS IDENTIFIER LBRACE (declaracaoAtributo | declaracaoMetodo
 declaracaoAtributo: tipo IDENTIFIER SEMICOLON;
 
 // Declaração de método
-declaracaoMetodo: tipo IDENTIFIER LPAREN (argumentos)? RPAREN LBRACE comandos RBRACE;
+declaracaoMetodo: tipoMetodos IDENTIFIER LPAREN (argumentos)? RPAREN LBRACE comandos RBRACE;
 
 // Argumentos de métodos
 argumentos: tipo IDENTIFIER (COMMA tipo IDENTIFIER)*;
 
 // Tipos permitidos
-tipo: INT | BOOL | VOID;
+tipo: INT | BOOL;
+
+// Tipos permitidos métodos
+tipoMetodos: tipo | VOID;
 
 // Comandos possíveis
 comandos: (comando SEMICOLON)*;
