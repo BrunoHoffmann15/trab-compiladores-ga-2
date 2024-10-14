@@ -56,13 +56,13 @@ comandos: (comando SEMICOLON)*;
 comando: atribuicao
        | condicional
        | chamadaMetodo
-       | RETURN expressao SEMICOLON; // Adicionado SEMICOLON para finalizar o comando
+       | RETURN expressao;
 
 // Atribuição
 atribuicao: IDENTIFIER ASSIGN expressao;
 
 // Condicional
-condicional: IF LPAREN expressaoBooleana RPAREN comando (ELSE comando)?;
+condicional: IF LPAREN expressaoBooleana RPAREN comando SEMICOLON (ELSE comando SEMICOLON)?;
 
 // Chamada de método
 chamadaMetodo: IDENTIFIER LPAREN (expressao (COMMA expressao)*)? RPAREN;

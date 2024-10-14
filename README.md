@@ -36,7 +36,7 @@ antlr4 FoolGrammar.g4
 Obs: ao utilizar o `/tools/antlr-4.x-complete.jar` você garante o uso das bibliotecas do antlr.
 
 ```bash
-javac -cp ../tools/antlr-4.x-complete.jar **.java
+javac -cp ../tools/antlr-4.13.2-complete.jar **.java
 ```
 
 3. A partir disso você pode executar os comandos para testar as árvores sintática:
