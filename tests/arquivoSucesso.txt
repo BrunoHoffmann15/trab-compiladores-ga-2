@@ -1,0 +1,47 @@
+class Main {
+  int precoProduto;
+  int valorInsento;
+  bool ehCaro;
+  bool mostrarOutputEmConsole;
+
+  void main() {
+    valorFinal = calcularTaxa(precoProduto);
+    mostrarValor(True, valorFinal);
+  }
+
+  void calcularTaxa(int preco) {
+    if (valorInsento > preco) return 0; else return preco * obterTaxa();;
+  }
+
+  int obterTaxa() {
+    return 2;
+  }
+
+  bool mostrarValor(bool mostrarValor, bool consoleAtivo, int valorFinal) {
+    mostrarOutputEmConsole = deveMostrar && consoleAtivo;
+
+    if (mostrarOutputEmConsole) if(ehCaro) mostrarValorEmVermelho(valorFinal);; else mostrarValorEmVerde(valorFinal);;
+    if (!mostrarOutputEmConsole) mostrarValorUI();;
+  }
+
+  void mostrarValorEmVerde(int valor) {
+    // TODO: Implementar
+  }
+
+  void mostrarValorEmVermelho(int valor) {
+    // TODO: Implementar
+  }
+
+  void mostrarValorUI(int valor) {
+    // TODO: Implementar
+  }
+
+  void mostrarValorEmVerde() {
+    // TODO: Implementar
+  }
+
+  void mostrarValorEmVermelho() {
+    // TODO: Implementar
+  }
+
+}
