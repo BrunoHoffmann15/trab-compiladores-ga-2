@@ -1,3 +1,4 @@
+// Alunos: Bruno da Siqueira Hoffmann e Rafael Klauck
 grammar FoolGrammar;
 
 // Tokens
