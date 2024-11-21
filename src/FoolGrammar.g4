@@ -8,6 +8,7 @@ BOOL: 'bool';
 VOID: 'void';
 IF: 'if';
 ELSE: 'else';
+WHILE: 'while';
 RETURN: 'return';
 TRUE: 'true';
 FALSE: 'false';
@@ -42,7 +43,13 @@ declaracaoClasse: CLASS IDENTIFIER LBRACE (declaracaoAtributo | declaracaoMetodo
 declaracaoAtributo: tipo IDENTIFIER SEMICOLON;
 
 // Declaração de método
-declaracaoMetodo: tipoMetodos IDENTIFIER LPAREN (argumentos)? RPAREN LBRACE comandos RBRACE;
+declaracaoMetodo: metodoMain | metodoNormal;
+
+// Método main
+metodoMain: VOID 'main' LPAREN RPAREN LBRACE comandos RBRACE;
+
+// Métodos normais
+metodoNormal: tipoMetodos IDENTIFIER LPAREN (argumentos)? RPAREN LBRACE comandos RBRACE;
 
 // Argumentos de métodos
 argumentos: tipo IDENTIFIER (COMMA tipo IDENTIFIER)*;
@@ -59,6 +66,7 @@ comandos: (comando SEMICOLON)*;
 // Comando individual
 comando: atribuicao
        | condicional
+       | repeticao
        | chamadaMetodo
        | RETURN expressao;
 
@@ -67,6 +75,9 @@ atribuicao: IDENTIFIER ASSIGN expressao;
 
 // Condicional
 condicional: IF LPAREN expressaoBooleana RPAREN comando SEMICOLON (ELSE comando SEMICOLON)?;
+
+// Repetição (while)
+repeticao: WHILE LPAREN expressaoBooleana RPAREN comando;
 
 // Chamada de método
 chamadaMetodo: IDENTIFIER LPAREN (expressao (COMMA expressao)*)? RPAREN;
