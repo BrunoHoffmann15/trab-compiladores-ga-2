@@ -1,3 +1,5 @@
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.concurrent.atomic.AtomicInteger;
@@ -21,7 +23,6 @@ public class FOOLISemanticoListener extends FoolGrammarBaseListener {
       throw new RuntimeException("Erro semântico: variável " + nome + " já declarada.");
     }
     symbolTable.put(nome, tipo);
-    System.out.println("Atributo declarado: " + nome + " do tipo " + tipo);
   }
 
   @Override
@@ -33,7 +34,6 @@ public class FOOLISemanticoListener extends FoolGrammarBaseListener {
         throw new RuntimeException("Erro semântico: argumento " + nome + " já declarado.");
       }
       symbolTable.put(nome, tipo);
-      System.out.println("Argumento declarado: " + nome + " do tipo " + tipo);
     }
   }
 
@@ -46,7 +46,6 @@ public class FOOLISemanticoListener extends FoolGrammarBaseListener {
     }
     String tac = variavel + " = " + ctx.expressao().getText();
     tacBuilder.append(tac).append("\n");
-    System.out.println("TAC Gerado: " + tac);
   }
 
   @Override
@@ -94,13 +93,19 @@ public class FOOLISemanticoListener extends FoolGrammarBaseListener {
     tacBuilder.append(labelEnd).append(":\n");
   }
 
-  public void printSymbolTable() {
-    System.out.println("Tabela de Símbolos:");
-    symbolTable.forEach((key, value) -> System.out.println(key + ": " + value));
-  }
+  public void saveOutput(String filename) throws IOException {
+    try (FileWriter writer = new FileWriter(filename)) {
+      writer.write("Tabela de Símbolos:\n");
+      symbolTable.forEach((key, value) -> {
+        try {
+          writer.write(key + ": " + value + "\n");
+        } catch (IOException e) {
+          throw new RuntimeException(e);
+        }
+      });
 
-  public void printTAC() {
-    System.out.println("Código Intermediário (TAC):");
-    System.out.println(tacBuilder.toString());
+      writer.write("\nCódigo Intermediário (TAC):\n");
+      writer.write(tacBuilder.toString());
+    }
   }
 }

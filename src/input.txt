@@ -4,6 +4,11 @@ class Main {
 
   int funcao() {
     while (val < valDois) val = val + 1;
+    int valTres;
+    valTres = val + valDois;
+    int soma;
+    soma = valTres + valDois;
+    return soma;
   }
 
   void main() {

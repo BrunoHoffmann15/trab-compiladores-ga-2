@@ -61,7 +61,7 @@ tipo: INT | BOOL;
 tipoMetodos: tipo | VOID;
 
 // Comandos possíveis
-comandos: (comando SEMICOLON)*;
+comandos: (comando SEMICOLON | declaracaoAtributo)*;
 
 // Comando individual
 comando: atribuicao

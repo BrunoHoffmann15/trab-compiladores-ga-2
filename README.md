@@ -32,8 +32,8 @@ alias grun='java -Xmx500M -cp "/usr/local/lib/antlr-4.13.2-complete.jar:$CLASSPA
 antlr4 FoolGrammar.g4
 ```
 
-2. Após instalar os pré-requisitos você precisa executar a compilação do `.java`, para isso execute: 
-Obs: ao utilizar o `/tools/antlr-4.x-complete.jar` você garante o uso das bibliotecas do antlr.
+2. Após instalar os pré-requisitos você precisa executar a compilação do `.java`, para isso execute:
+   Obs: ao utilizar o `/tools/antlr-4.x-complete.jar` você garante o uso das bibliotecas do antlr.
 
 ```bash
 javac -cp ../tools/antlr-4.13.2-complete.jar **.java
@@ -59,4 +59,10 @@ Exemplo:
 grun FoolGrammar declaracaoMetodo -gui
 int metodo() {}
 ˆD
+```
+
+4. Para gerar código intermediário e a tabela de símbolos:
+
+```bash
+java Main input.txt output.txt
 ```

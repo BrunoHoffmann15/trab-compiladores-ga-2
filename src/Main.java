@@ -6,9 +6,17 @@ import java.nio.file.Paths;
 
 public class Main {
   public static void main(String[] args) {
+    if (args.length < 2) {
+      System.out.println("Uso: java Main <arquivo de entrada> <arquivo de saída>");
+      return;
+    }
+
+    String inputFile = args[0];
+    String outputFile = args[1];
+
     try {
       // Lê o código-fonte de entrada
-      String source = Files.readString(Paths.get("input.txt"));
+      String source = Files.readString(Paths.get(inputFile));
       CharStream input = CharStreams.fromString(source);
 
       // Lexer e Parser
@@ -22,12 +30,13 @@ public class Main {
       ParseTreeWalker walker = new ParseTreeWalker();
       walker.walk(listener, tree);
 
-      // Exibe resultados
-      listener.printSymbolTable();
-      listener.printTAC();
+      // Salvar a tabela de símbolos e o TAC no mesmo arquivo
+      listener.saveOutput(outputFile);
+
+      System.out.println("Análise concluída com sucesso. Resultados salvos em: " + outputFile);
 
     } catch (Exception e) {
       e.printStackTrace();
     }
-  }
+  } 
 }

@@ -1,0 +1,21 @@
+Tabela de Símbolos:
+val: int
+valDois: int
+valTres: int
+soma: int
+
+Código Intermediário (TAC):
+val = val+1
+L0:
+if not(val<valDois) goto L1
+val=val+1
+goto L0
+L1:
+valTres = val+valDois
+soma = valTres+valDois
+if not(val==valDois) goto L2
+returnval+valDois
+goto L3
+L2:
+returnvalDois
+L3:
