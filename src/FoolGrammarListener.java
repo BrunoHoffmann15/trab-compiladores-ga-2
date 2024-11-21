@@ -47,6 +47,26 @@ public interface FoolGrammarListener extends ParseTreeListener {
 	 */
 	void exitDeclaracaoMetodo(FoolGrammarParser.DeclaracaoMetodoContext ctx);
 	/**
+	 * Enter a parse tree produced by {@link FoolGrammarParser#metodoMain}.
+	 * @param ctx the parse tree
+	 */
+	void enterMetodoMain(FoolGrammarParser.MetodoMainContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link FoolGrammarParser#metodoMain}.
+	 * @param ctx the parse tree
+	 */
+	void exitMetodoMain(FoolGrammarParser.MetodoMainContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link FoolGrammarParser#metodoNormal}.
+	 * @param ctx the parse tree
+	 */
+	void enterMetodoNormal(FoolGrammarParser.MetodoNormalContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link FoolGrammarParser#metodoNormal}.
+	 * @param ctx the parse tree
+	 */
+	void exitMetodoNormal(FoolGrammarParser.MetodoNormalContext ctx);
+	/**
 	 * Enter a parse tree produced by {@link FoolGrammarParser#argumentos}.
 	 * @param ctx the parse tree
 	 */
@@ -116,6 +136,16 @@ public interface FoolGrammarListener extends ParseTreeListener {
 	 * @param ctx the parse tree
 	 */
 	void exitCondicional(FoolGrammarParser.CondicionalContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link FoolGrammarParser#repeticao}.
+	 * @param ctx the parse tree
+	 */
+	void enterRepeticao(FoolGrammarParser.RepeticaoContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link FoolGrammarParser#repeticao}.
+	 * @param ctx the parse tree
+	 */
+	void exitRepeticao(FoolGrammarParser.RepeticaoContext ctx);
 	/**
 	 * Enter a parse tree produced by {@link FoolGrammarParser#chamadaMetodo}.
 	 * @param ctx the parse tree

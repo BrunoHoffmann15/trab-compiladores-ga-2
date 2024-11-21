@@ -64,6 +64,30 @@ public class FoolGrammarBaseListener implements FoolGrammarListener {
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
+	@Override public void enterMetodoMain(FoolGrammarParser.MetodoMainContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitMetodoMain(FoolGrammarParser.MetodoMainContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterMetodoNormal(FoolGrammarParser.MetodoNormalContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitMetodoNormal(FoolGrammarParser.MetodoNormalContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
 	@Override public void enterArgumentos(FoolGrammarParser.ArgumentosContext ctx) { }
 	/**
 	 * {@inheritDoc}
@@ -143,6 +167,18 @@ public class FoolGrammarBaseListener implements FoolGrammarListener {
 	 * <p>The default implementation does nothing.</p>
 	 */
 	@Override public void exitCondicional(FoolGrammarParser.CondicionalContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterRepeticao(FoolGrammarParser.RepeticaoContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitRepeticao(FoolGrammarParser.RepeticaoContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
