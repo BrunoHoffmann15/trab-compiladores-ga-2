@@ -1,8 +1,11 @@
 import org.antlr.v4.runtime.*;
 import org.antlr.v4.runtime.tree.*;
 
+import java.io.FileWriter;
+import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
+import java.util.List;
 
 public class Main {
   public static void main(String[] args) {
@@ -23,6 +26,7 @@ public class Main {
       FoolGrammarLexer lexer = new FoolGrammarLexer(input);
       CommonTokenStream tokens = new CommonTokenStream(lexer);
       FoolGrammarParser parser = new FoolGrammarParser(tokens);
+      FooliLexerTable lexerTable = new FooliLexerTable(lexer, tokens);
 
       // Listener para análise semântica
       ParseTree tree = parser.programa();
@@ -30,13 +34,34 @@ public class Main {
       ParseTreeWalker walker = new ParseTreeWalker();
       walker.walk(listener, tree);
 
-      // Salvar a tabela de símbolos e o TAC no mesmo arquivo
-      listener.saveOutput(outputFile);
+      // Obtém tabela de símbolos
+      String symbolTable = lexerTable.getDataFromSymbolTable();
+
+      // Obtém tac
+      String tac = listener.getTac();
+
+      writeFile(outputFile, symbolTable, tac);
 
       System.out.println("Análise concluída com sucesso. Resultados salvos em: " + outputFile);
 
     } catch (Exception e) {
       e.printStackTrace();
     }
-  } 
+  }
+
+  private static void writeFile(String outputFile, String symbolTable, String tac) throws IOException {
+    try (FileWriter writer = new FileWriter(outputFile)) {
+      // Escreve tabela de símbolos
+      writer.write("==============================\n");
+      writer.write("Tabela de Símbolos:\n");
+      writer.write("==============================\n");
+      writer.write(symbolTable);
+
+      // Escreve TAC
+      writer.write("\n==============================\n");
+      writer.write("Código Intermediário (TAC):\n");
+      writer.write("==============================\n");
+      writer.write(tac);
+    }
+  }
 }

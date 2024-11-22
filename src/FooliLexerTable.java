@@ -19,10 +19,9 @@ public class FooliLexerTable {
         this.populateTokensTypes();
     }
 
-    public List<String> getDataFromSymbolTable() {
-        List<String> tableSymbols = new ArrayList<>();
+    public String getDataFromSymbolTable() {
+        StringBuilder stringBuilder = new StringBuilder();
         List<Token> tokenList = tokens.getTokens();
-        System.out.println("Lista de tokens" + tokenList.toString());
 
         for (Token token : tokenList) {
             String tokenText = token.getText();
@@ -32,10 +31,13 @@ public class FooliLexerTable {
             if (tableType == null)
                 continue;
 
-            tableSymbols.add(tokenText + ": " + tableType + "\n");
+            stringBuilder.append(tokenText);
+            stringBuilder.append(" - ");
+            stringBuilder.append(tableType);
+            stringBuilder.append("\n");
         }
 
-        return tableSymbols;
+        return stringBuilder.toString();
     }
 
     public void populateTokensTypes() {

@@ -93,9 +93,15 @@ public class FOOLISemanticoListener extends FoolGrammarBaseListener {
     tacBuilder.append(labelEnd).append(":\n");
   }
 
+  public String getTac() {
+    return tacBuilder.toString();
+  }
+
   public void saveOutput(String filename) throws IOException {
     try (FileWriter writer = new FileWriter(filename)) {
+      writer.write("==============================\n");
       writer.write("Tabela de Símbolos:\n");
+      writer.write("==============================\n");
       symbolTable.forEach((key, value) -> {
         try {
           writer.write(key + ": " + value + "\n");
@@ -104,7 +110,9 @@ public class FOOLISemanticoListener extends FoolGrammarBaseListener {
         }
       });
 
+      writer.write("==============================\n");
       writer.write("\nCódigo Intermediário (TAC):\n");
+      writer.write("==============================\n");
       writer.write(tacBuilder.toString());
     }
   }
