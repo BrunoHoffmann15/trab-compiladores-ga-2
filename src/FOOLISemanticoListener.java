@@ -1,6 +1,8 @@
 import java.io.FileWriter;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.concurrent.atomic.AtomicInteger;
 
@@ -91,6 +93,29 @@ public class FOOLISemanticoListener extends FoolGrammarBaseListener {
 
     // Fim do loop
     tacBuilder.append(labelEnd).append(":\n");
+  }
+
+  @Override
+  public void exitChamadaMetodo(FoolGrammarParser.ChamadaMetodoContext ctx) {
+    // Obtém o identificador do método
+    String metodo = ctx.IDENTIFIER().getText();
+
+    // Obtém os parâmetros
+    List<FoolGrammarParser.ExpressaoContext> parametros = ctx.expressao();
+
+    // Processa os parâmetros
+    if (parametros != null && !parametros.isEmpty()) {
+      for (FoolGrammarParser.ExpressaoContext param : parametros) {
+        String paramValue = param.getText(); // Obtém o texto da expressão
+        tacBuilder.append("param " + paramValue).append("\n");
+      }
+    }
+
+    if (parametros != null && parametros.size() > 0) {
+      tacBuilder.append("call " + metodo + ", " + parametros.size()).append("\n");
+    } else {
+      tacBuilder.append("call " + metodo).append("\n");
+    }
   }
 
   public String getTac() {
