@@ -26,7 +26,6 @@ public class Main {
       FoolGrammarLexer lexer = new FoolGrammarLexer(input);
       CommonTokenStream tokens = new CommonTokenStream(lexer);
       FoolGrammarParser parser = new FoolGrammarParser(tokens);
-      FooliLexerTable lexerTable = new FooliLexerTable(lexer, tokens);
 
       // Listener para análise semântica
       ParseTree tree = parser.programa();
@@ -35,7 +34,7 @@ public class Main {
       walker.walk(listener, tree);
 
       // Obtém tabela de símbolos
-      String symbolTable = lexerTable.getDataFromSymbolTable();
+      String symbolTable = listener.getSymbolTable();
 
       // Obtém tac
       String tac = listener.getTac();

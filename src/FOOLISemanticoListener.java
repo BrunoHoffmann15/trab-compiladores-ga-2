@@ -43,10 +43,15 @@ public class FOOLISemanticoListener extends FoolGrammarBaseListener {
   @Override
   public void exitAtribuicao(FoolGrammarParser.AtribuicaoContext ctx) {
     String variavel = ctx.IDENTIFIER().getText();
+
     if (!symbolTable.containsKey(variavel)) {
       throw new RuntimeException("Erro semântico: variável " + variavel + " não declarada.");
     }
+
+    // Configuração
+
     String tac = variavel + " = " + ctx.expressao().getText();
+
     tacBuilder.append(tac).append("\n");
   }
 
@@ -95,13 +100,13 @@ public class FOOLISemanticoListener extends FoolGrammarBaseListener {
     tacBuilder.append(labelEnd).append(":\n");
   }
 
-  @Override
-  public void exitChamadaMetodo(FoolGrammarParser.ChamadaMetodoContext ctx) {
+  @Override public void exitChamadaMetodo(FoolGrammarParser.ChamadaMetodoContext ctx) {
     // Obtém o identificador do método
     String metodo = ctx.IDENTIFIER().getText();
 
     // Obtém os parâmetros
     List<FoolGrammarParser.ExpressaoContext> parametros = ctx.expressao();
+
 
     // Processa os parâmetros
     if (parametros != null && !parametros.isEmpty()) {
@@ -120,6 +125,19 @@ public class FOOLISemanticoListener extends FoolGrammarBaseListener {
 
   public String getTac() {
     return tacBuilder.toString();
+  }
+
+  public String getSymbolTable() {
+    StringBuilder stringBuilder = new StringBuilder();
+
+    symbolTable.forEach((key, value) -> {
+      stringBuilder.append(key);
+      stringBuilder.append(": ");
+      stringBuilder.append(value);
+      stringBuilder.append("\n");
+    });
+
+    return stringBuilder.toString();
   }
 
   public void saveOutput(String filename) throws IOException {
