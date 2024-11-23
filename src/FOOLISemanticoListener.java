@@ -17,7 +17,9 @@ public class FOOLISemanticoListener extends FoolGrammarBaseListener {
     return "L" + labelCounter.getAndIncrement();
   }
 
-  private String newTempVar() { return  "t" + tempCounter.getAndIncrement(); }
+  private String newTempVar() {
+    return "t" + tempCounter.getAndIncrement();
+  }
 
   // Ações semânticas para declarações
   @Override
@@ -48,7 +50,8 @@ public class FOOLISemanticoListener extends FoolGrammarBaseListener {
 
   @Override
   public void enterMetodoMain(FoolGrammarParser.MetodoMainContext ctx) {
-    tacBuilder.append("main").append(":").append("\n");;
+    tacBuilder.append("main").append(":").append("\n");
+    ;
     processComandos(ctx.comandos());
     tacBuilder.append("\n");
     super.enterMetodoMain(ctx);
@@ -56,7 +59,8 @@ public class FOOLISemanticoListener extends FoolGrammarBaseListener {
 
   @Override
   public void enterMetodoNormal(FoolGrammarParser.MetodoNormalContext ctx) {
-    tacBuilder.append(ctx.IDENTIFIER()).append(":").append("\n");;
+    tacBuilder.append(ctx.IDENTIFIER()).append(":").append("\n");
+    ;
     processComandos(ctx.comandos());
     tacBuilder.append("\n");
     super.enterMetodoNormal(ctx);
@@ -128,7 +132,7 @@ public class FOOLISemanticoListener extends FoolGrammarBaseListener {
     tacBuilder.append(labelEnd).append(":\n");
   }
 
-  private void processChamadaMetodo(FoolGrammarParser.ChamadaMetodoContext ctx) {
+  private void processChamadaMetodo(FoolGrammarParser.ChamadaMetodoContext ctx, String... args) {
     String metodo = ctx.IDENTIFIER().getText();
 
     // Obtém os parâmetros
@@ -140,6 +144,10 @@ public class FOOLISemanticoListener extends FoolGrammarBaseListener {
         String paramValue = param.getText(); // Obtém o texto da expressão
         tacBuilder.append("param ").append(paramValue).append("\n");
       }
+    }
+
+    if (args.length > 0) {
+      tacBuilder.append(args[0]);
     }
 
     if (parametros != null && parametros.size() > 0) {
@@ -172,7 +180,8 @@ public class FOOLISemanticoListener extends FoolGrammarBaseListener {
       String op = ctx.getChild(2 * i - 1).getText();
       String right = processTerm(ctx.termo(i));
       String temp = newTempVar();
-      tacBuilder.append(temp + " = " + left + " " + op + " " + right).append("\n");;
+      tacBuilder.append(temp + " = " + left + " " + op + " " + right).append("\n");
+      ;
       left = temp;
     }
     return left;
@@ -183,13 +192,14 @@ public class FOOLISemanticoListener extends FoolGrammarBaseListener {
     String left = processFatorBoole(ctx.fatorBoole(0));
 
     for (int i = 1; i < ctx.fatorBoole().size(); i++) {
-      String op = ctx.getChild(2 * i - 1).getText();  // Operador (&&, ||, etc.)
+      String op = ctx.getChild(2 * i - 1).getText(); // Operador (&&, ||, etc.)
       String right = processFatorBoole(ctx.fatorBoole(i));
       String temp = newTempVar();
 
       // Gera o código para combinar os fatores usando o operador
-      tacBuilder.append(temp).append(" = ").append(left).append(" ").append(op).append(" ").append(right).append("\n");;
-      left = temp;  // Atualiza o fator esquerdo para o próximo operador
+      tacBuilder.append(temp).append(" = ").append(left).append(" ").append(op).append(" ").append(right).append("\n");
+      ;
+      left = temp; // Atualiza o fator esquerdo para o próximo operador
     }
 
     return left;
@@ -200,13 +210,14 @@ public class FOOLISemanticoListener extends FoolGrammarBaseListener {
     String left = processTermoBoleano(ctx.termoBoole(0));
 
     for (int i = 1; i < ctx.termoBoole().size(); i++) {
-      String op = ctx.getChild(2 * i - 1).getText();  // Operador (&&, ||, etc.)
+      String op = ctx.getChild(2 * i - 1).getText(); // Operador (&&, ||, etc.)
       String right = processTermoBoleano(ctx.termoBoole(i));
       String temp = newTempVar();
 
       // Gera o código para combinar os fatores usando o operador
-      tacBuilder.append(temp).append(" = ").append(left).append(" ").append(op).append(" ").append(right).append("\n");;
-      left = temp;  // Atualiza o fator esquerdo para o próximo operador
+      tacBuilder.append(temp).append(" = ").append(left).append(" ").append(op).append(" ").append(right).append("\n");
+      ;
+      left = temp; // Atualiza o fator esquerdo para o próximo operador
     }
 
     return left;
@@ -215,7 +226,8 @@ public class FOOLISemanticoListener extends FoolGrammarBaseListener {
   private String processTermoBoleano(FoolGrammarParser.TermoBooleContext ctx) {
     if (ctx.expressaoBooleana() != null) {
       return processExpressaoBooleana(ctx.expressaoBooleana());
-    } if (ctx.TRUE() != null) {
+    }
+    if (ctx.TRUE() != null) {
       return ctx.TRUE().getText();
     } else if (ctx.FALSE() != null) {
       return ctx.FALSE().getText();
@@ -228,13 +240,17 @@ public class FOOLISemanticoListener extends FoolGrammarBaseListener {
     return "";
   }
 
-
   private String processTerm(FoolGrammarParser.TermoContext ctx) {
     if (ctx.NUMBER() != null) {
       return ctx.NUMBER().getText();
     } else if (ctx.IDENTIFIER() != null) {
       return ctx.IDENTIFIER().getText();
+    } else if (ctx.chamadaMetodo() != null) {
+      String tempVar = newTempVar();
+      processChamadaMetodo(ctx.chamadaMetodo(), tempVar + " = ");
+      return tempVar;
     }
+
     return "";
   }
 
