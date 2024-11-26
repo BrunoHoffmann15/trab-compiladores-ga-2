@@ -24,7 +24,7 @@ alias antlr4='java -Xmx500M -cp "/usr/local/lib/antlr-4.13.2-complete.jar:$CLASS
 alias grun='java -Xmx500M -cp "/usr/local/lib/antlr-4.13.2-complete.jar:$CLASSPATH" org.antlr.v4.gui.TestRig'
 ```
 
-## Como executar
+## Como Executar - Árvore Sintática
 
 1. Transforme o arquivo `.g4` em uma classe java, para isso execute:
 
@@ -61,8 +61,29 @@ int metodo() {}
 ˆD
 ```
 
-4. Para gerar código intermediário e a tabela de símbolos:
+## Como Executar - Gerador de TAC e Tabela de Símbolos
+
+1. Após instalar os pré-requisitos você precisa executar a compilação do `.java`, para isso execute:
+   Obs: ao utilizar o `/tools/antlr-4.x-complete.jar` você garante o uso das bibliotecas do antlr.
 
 ```bash
-java Main input.txt output.txt
+javac -cp ../tools/antlr-4.13.2-complete.jar **.java
+``` 
+
+2. Entre no diretório `src`:
+```bash
+cd src
+```
+
+3. Para gerar código intermediário e a tabela de símbolos:
+
+- No linux/macos:
+```bash
+java -cp "../tools/antlr-4.13.2-complete.jar:." Main input.txt output.txt
+```
+
+- No windows:
+
+```bash
+java -cp "../tools/antlr-4.13.2-complete.jar;." Main input.txt output.txt
 ```
